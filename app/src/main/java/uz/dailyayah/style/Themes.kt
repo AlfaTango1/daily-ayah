@@ -23,6 +23,13 @@ object Themes {
         Theme("paper", c(0xFFFFFFFF), c(0xFFF1F1F1), c(0xFF1A1A1A), c(0xFF0F4C4A)),
         Theme("sky", c(0xFFDCEBFA), c(0xFFB8D4F0), c(0xFF0F2540), c(0xFF1F5FA8)),
         Theme("mint", c(0xFFE3F4EC), c(0xFFC2E6D4), c(0xFF113528), c(0xFF1E7A55)),
+        // Inspired by the tiles of Samarkand and Bukhara.
+        Theme("samarkand", c(0xFF143A7B), c(0xFF0A1F45), c(0xFFF4F1E6), c(0xFF45C3CF)),
+        Theme("turquoise", c(0xFF0E7C86), c(0xFF074A52), c(0xFFF2FBFA), c(0xFFF3D27A)),
+        Theme("ruby", c(0xFF7A1630), c(0xFF420A19), c(0xFFFFF1F3), c(0xFFF2C46B)),
+        Theme("olive", c(0xFF4B5A2A), c(0xFF2A3315), c(0xFFF6F3E4), c(0xFFE6C77A)),
+        Theme("parchment", c(0xFFF3E5C3), c(0xFFDCC593), c(0xFF3A2A12), c(0xFF8C2F1B)),
+        Theme("dusk", c(0xFF3D2B56), c(0xFFB0563A), c(0xFFFFF4EA), c(0xFFFFD08A)),
     )
 
     fun byKey(key: String): Theme = all.firstOrNull { it.key == key } ?: all[0]

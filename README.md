@@ -21,10 +21,13 @@ Uzbekistan has no single legally designated "official" translation; the app expl
 - **Four widget types**: Verse (Arabic + translation), Verse small (translation), Arabic calligraphy, My dhikr (your own text)
 - **Every widget is editable**: tap ✎ on the widget (or *Edit* in the app) to change
   - content (Arabic, translation, both, or your own text)
-  - Arabic font (Amiri, Scheherazade, Noto Naskh, Lateef, Noto Kufi, Reem Kufi, Ruqaa)
-  - translation font (Sans, Serif, Light, Medium, Condensed, Mono, Casual, Cursive)
+  - 8 ready-made styles (Samarkand, Bukhara gold, Mihrab, Night prayer, Nastaliq, Ruby, Minimal, Paper)
+  - 19 Arabic fonts (Amiri, Amiri Quran, Scheherazade, Naskh, Nastaliq, Ruqaa, Kufi styles and more)
+  - 17 translation fonts (Lora, Merriweather, PT Serif, EB Garamond, Playfair, Montserrat, Marck Script…)
+  - Islamic geometric patterns (8-point star, rosette, zellige, arabesque, lattice, dots) with adjustable strength
+  - frames (line, double, ornate corners, mihrab arch), text shadow, line spacing, verse-number mark ۝
   - text sizes, bold, italic, alignment
-  - 10 colour themes, background opacity, corner roundness
+  - 16 colour themes, background opacity, corner roundness
   - surah name and reference on/off
 - Tap ↻ on a widget for another verse; tap the widget to open it in the app
 - In the app: browse previous/next verses, random verse, copy, share; its own font/style settings

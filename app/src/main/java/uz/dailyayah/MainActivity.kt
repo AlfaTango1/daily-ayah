@@ -30,11 +30,13 @@ import uz.dailyayah.data.VerseSchedule
 import uz.dailyayah.databinding.ActivityMainBinding
 import uz.dailyayah.style.ContentMode
 import uz.dailyayah.style.Fonts
+import uz.dailyayah.style.Patterns
 import uz.dailyayah.style.TextAlign
 import uz.dailyayah.style.Themes
 import uz.dailyayah.style.WidgetStyle
 import uz.dailyayah.widget.RenewScheduler
 import uz.dailyayah.widget.WidgetKind
+import uz.dailyayah.widget.WidgetRenderer
 import uz.dailyayah.widget.WidgetStore
 import uz.dailyayah.widget.WidgetUpdater
 
@@ -125,7 +127,7 @@ class MainActivity : AppCompatActivity() {
         binding.title.setText(if (following) R.string.verse_now else R.string.browsing)
         binding.subtitle.text = getString(R.string.renews, getString(AppSettings.interval(this).labelRes).lowercase())
         binding.surahName.text = "${verse.surahNameAr}  ·  ${verse.surahNameEn}"
-        binding.arabic.text = verse.arabic
+        binding.arabic.text = AppSettings.appStyle(this).arabicOf(verse)
         binding.translation.text = style.translationOf(verse)
         binding.reference.text = verse.reference
         applyStyle(style)
@@ -135,13 +137,28 @@ class MainActivity : AppCompatActivity() {
     private fun applyStyle(style: WidgetStyle) {
         val theme = Themes.byKey(style.theme)
         val density = resources.displayMetrics.density
-        binding.card.background = GradientDrawable(
-            GradientDrawable.Orientation.TL_BR,
-            intArrayOf(
-                Themes.withOpacity(theme.bgStart, style.opacity.coerceAtLeast(60)),
-                Themes.withOpacity(theme.bgEnd, style.opacity.coerceAtLeast(60)),
-            )
-        ).apply { cornerRadius = style.corner * density }
+        // Background with the chosen pattern and frame, drawn at the card's real size.
+        val cardStyle = style.copy(opacity = style.opacity.coerceAtLeast(60))
+        binding.card.post {
+            if (binding.card.width > 0 && binding.card.height > 0) {
+                binding.card.background = android.graphics.drawable.BitmapDrawable(
+                    resources,
+                    WidgetRenderer.renderBackground(cardStyle, binding.card.width, binding.card.height, density)
+                )
+            }
+        }
+        val framed = style.frame != "none"
+        val sidePad = ((if (framed) 26 else 22) * density).toInt()
+        val topPad = sidePad + Patterns.frameTopSpace(style.frame, resources.displayMetrics.widthPixels.toFloat(), 400 * density, density).toInt()
+        binding.card.setPadding(sidePad, topPad, sidePad, sidePad)
+
+        val shadowColor = 0x66000000
+        val shadowRadius = if (style.shadow) 3f * density else 0f
+        binding.arabic.setShadowLayer(shadowRadius, 0f, 1.2f * density, shadowColor)
+        binding.translation.setShadowLayer(shadowRadius, 0f, 1.2f * density, shadowColor)
+        val spacing = style.lineSpacing.coerceIn(70, 220) / 100f
+        binding.arabic.setLineSpacing(0f, 1.45f * spacing)
+        binding.translation.setLineSpacing(0f, 1.25f * spacing)
 
         binding.arabic.typeface = Fonts.arabicTypeface(this, style.arabicFont, style.bold)
         binding.arabic.setTextSize(TypedValue.COMPLEX_UNIT_SP, style.arabicSize * 1.15f)

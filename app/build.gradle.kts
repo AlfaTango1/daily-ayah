@@ -180,13 +180,38 @@ val downloadQuranAssets by tasks.registering {
         // 2) Arabic fonts from the Google Fonts repository (SIL Open Font License).
         val fontsDir = File(assetsDir, "fonts").apply { mkdirs() }
         val fonts = linkedMapOf(
+            // Arabic
             "amiri" to "amiri",
+            "amiriquran" to "amiriquran",
             "scheherazade" to "scheherazadenew",
             "naskh" to "notonaskharabic",
+            "lateef" to "lateef",
+            "harmattan" to "harmattan",
+            "mirza" to "mirza",
+            "nastaliq" to "notonastaliqurdu",
+            "gulzar" to "gulzar",
+            "ruqaa" to "arefruqaa",
             "kufi" to "notokufiarabic",
             "reemkufi" to "reemkufi",
-            "lateef" to "lateef",
-            "ruqaa" to "arefruqaa",
+            "kufam" to "kufam",
+            "elmessiri" to "elmessiri",
+            "rakkas" to "rakkas",
+            "lalezar" to "lalezar",
+            "marhey" to "marhey",
+            "cairo" to "cairo",
+            "tajawal" to "tajawal",
+            // Latin + Cyrillic, for translations
+            "lora" to "lora",
+            "merriweather" to "merriweather",
+            "ptserif" to "ptserif",
+            "ebgaramond" to "ebgaramond",
+            "cormorant" to "cormorantgaramond",
+            "playfair" to "playfairdisplay",
+            "philosopher" to "philosopher",
+            "montserrat" to "montserrat",
+            "comfortaa" to "comfortaa",
+            "marck" to "marckscript",
+            "caveat" to "caveat",
         )
         for ((key, family) in fonts) {
             val out = File(fontsDir, "$key.ttf")

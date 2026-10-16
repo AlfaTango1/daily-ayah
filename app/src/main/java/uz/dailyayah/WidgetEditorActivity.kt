@@ -24,6 +24,8 @@ import uz.dailyayah.style.Fonts
 import uz.dailyayah.style.TextAlign
 import uz.dailyayah.style.Themes
 import uz.dailyayah.style.Lang
+import uz.dailyayah.style.Patterns
+import uz.dailyayah.style.Presets
 import uz.dailyayah.style.WidgetStyle
 import uz.dailyayah.widget.WidgetKind
 import uz.dailyayah.widget.WidgetRenderer
@@ -75,6 +77,8 @@ class WidgetEditorActivity : AppCompatActivity() {
 
         buildFontChips()
         buildThemeSwatches()
+        buildPatternChips()
+        buildPresetChips()
         bindValues()
         attachListeners()
 
@@ -126,10 +130,35 @@ class WidgetEditorActivity : AppCompatActivity() {
             chip.typeface = Fonts.arabicTypeface(this, option.key, false)
             arabicChipKeys[chip.id] = option.key
         }
-        for (option in Fonts.text) {
-            val chip = newChip(binding.textFontGroup, option.label)
+        for (option in Fonts.availableText(this)) {
+            val chip = newChip(binding.textFontGroup, "${option.label}  Aa Яя")
             chip.typeface = Fonts.textTypeface(this, option.key, false, false)
             textChipKeys[chip.id] = option.key
+        }
+    }
+
+    private val patternChipKeys = HashMap<Int, String>()
+    private val frameChipKeys = HashMap<Int, String>()
+
+    private fun buildPatternChips() {
+        for ((key, label) in Patterns.patterns) {
+            patternChipKeys[newChip(binding.patternGroup, getString(label)).id] = key
+        }
+        for ((key, label) in Patterns.frames) {
+            frameChipKeys[newChip(binding.frameGroup, getString(label)).id] = key
+        }
+    }
+
+    /** One-tap looks; they are buttons, not a selection. */
+    private fun buildPresetChips() {
+        for (preset in Presets.all) {
+            val chip = newChip(binding.presetGroup, getString(preset.labelRes))
+            chip.isCheckable = false
+            chip.setOnClickListener {
+                style = preset.apply(style)
+                bindValues()
+                refreshPreview()
+            }
         }
     }
 
@@ -191,6 +220,14 @@ class WidgetEditorActivity : AppCompatActivity() {
         binding.textSize.value = style.textSize.toFloat().coerceIn(binding.textSize.valueFrom, binding.textSize.valueTo)
         binding.opacity.value = (style.opacity / 5 * 5).toFloat().coerceIn(0f, 100f)
         binding.corner.value = (style.corner / 2 * 2).toFloat().coerceIn(0f, 40f)
+        binding.lineSpacing.value = (style.lineSpacing / 5 * 5).toFloat().coerceIn(70f, 200f)
+        binding.patternIntensity.value = (style.patternIntensity / 2 * 2).toFloat().coerceIn(4f, 80f)
+        binding.shadow.isChecked = style.shadow
+        binding.ayahMark.isChecked = style.ayahMark
+        (patternChipKeys.entries.firstOrNull { it.value == style.pattern } ?: patternChipKeys.entries.firstOrNull())
+            ?.let { binding.patternGroup.check(it.key) }
+        (frameChipKeys.entries.firstOrNull { it.value == style.frame } ?: frameChipKeys.entries.firstOrNull())
+            ?.let { binding.frameGroup.check(it.key) }
         binding.bold.isChecked = style.bold
         binding.italic.isChecked = style.italic
         binding.showSurah.isChecked = style.showSurahName
@@ -239,6 +276,19 @@ class WidgetEditorActivity : AppCompatActivity() {
         binding.textSize.addOnChangeListener { _, v, _ -> if (controlsReady) change(style.copy(textSize = v.toInt())) }
         binding.opacity.addOnChangeListener { _, v, _ -> if (controlsReady) change(style.copy(opacity = v.toInt())) }
         binding.corner.addOnChangeListener { _, v, _ -> if (controlsReady) change(style.copy(corner = v.toInt())) }
+        binding.patternGroup.setOnCheckedStateChangeListener { _, ids ->
+            val key = ids.firstOrNull()?.let { patternChipKeys[it] } ?: return@setOnCheckedStateChangeListener
+            if (controlsReady) change(style.copy(pattern = key))
+            updateVisibility()
+        }
+        binding.frameGroup.setOnCheckedStateChangeListener { _, ids ->
+            val key = ids.firstOrNull()?.let { frameChipKeys[it] } ?: return@setOnCheckedStateChangeListener
+            if (controlsReady) change(style.copy(frame = key))
+        }
+        binding.patternIntensity.addOnChangeListener { _, v, _ -> if (controlsReady) change(style.copy(patternIntensity = v.toInt())) }
+        binding.lineSpacing.addOnChangeListener { _, v, _ -> if (controlsReady) change(style.copy(lineSpacing = v.toInt())) }
+        binding.shadow.setOnCheckedChangeListener { _, c -> if (controlsReady) change(style.copy(shadow = c)) }
+        binding.ayahMark.setOnCheckedChangeListener { _, c -> if (controlsReady) change(style.copy(ayahMark = c)) }
         binding.bold.setOnCheckedChangeListener { _, c -> if (controlsReady) change(style.copy(bold = c)) }
         binding.italic.setOnCheckedChangeListener { _, c -> if (controlsReady) change(style.copy(italic = c)) }
         binding.showSurah.setOnCheckedChangeListener { _, c -> if (controlsReady) change(style.copy(showSurahName = c)) }
@@ -255,6 +305,9 @@ class WidgetEditorActivity : AppCompatActivity() {
     }
 
     private fun updateVisibility() {
+        val patterned = style.pattern != "none"
+        binding.patternIntensity.visibility = if (patterned) View.VISIBLE else View.GONE
+        binding.patternIntensityLabel.visibility = binding.patternIntensity.visibility
         val custom = style.content == ContentMode.CUSTOM_TEXT
         binding.customTextLayout.visibility = if (custom) View.VISIBLE else View.GONE
         binding.translationGroup.isEnabled = !custom && style.content != ContentMode.ARABIC_ONLY

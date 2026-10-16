@@ -42,12 +42,22 @@ data class WidgetStyle(
     val corner: Int = 24,
     val showSurahName: Boolean = true,
     val showReference: Boolean = true,
+    val pattern: String = "none",
+    val patternIntensity: Int = 30,
+    val frame: String = "none",
+    val shadow: Boolean = false,
+    val ayahMark: Boolean = true,
+    val lineSpacing: Int = 100, // percent of the normal spacing
 ) {
     /** Selected translations, in a fixed order, separated by a blank line. */
     fun translationOf(verse: Verse): String =
         Lang.entries.filter { it in translations }
             .ifEmpty { listOf(Lang.EN) }
             .joinToString("\n\n") { it.textOf(verse) }
+
+    /** Arabic text, optionally followed by the end-of-ayah sign with the verse number. */
+    fun arabicOf(verse: Verse): String =
+        if (ayahMark) "${verse.arabic} \u06DD${toArabicDigits(verse.numberInSurah)}" else verse.arabic
 
     fun toJson(): String = JSONObject()
         .put("content", content.name)
@@ -65,6 +75,12 @@ data class WidgetStyle(
         .put("corner", corner)
         .put("showSurahName", showSurahName)
         .put("showReference", showReference)
+        .put("pattern", pattern)
+        .put("patternIntensity", patternIntensity)
+        .put("frame", frame)
+        .put("shadow", shadow)
+        .put("ayahMark", ayahMark)
+        .put("lineSpacing", lineSpacing)
         .toString()
 
     companion object {
@@ -74,6 +90,9 @@ data class WidgetStyle(
             "ru" -> listOf(Lang.RU)
             else -> listOf(Lang.EN)
         }
+
+        fun toArabicDigits(n: Int): String =
+            n.toString().map { c -> if (c in '0'..'9') '\u0660' + (c - '0') else c }.joinToString("")
 
         private inline fun <reified T : Enum<T>> enumOr(value: String?, fallback: T): T =
             runCatching { enumValueOf<T>(value!!) }.getOrDefault(fallback)
@@ -114,6 +133,12 @@ data class WidgetStyle(
                     corner = o.optInt("corner", d.corner),
                     showSurahName = o.optBoolean("showSurahName", d.showSurahName),
                     showReference = o.optBoolean("showReference", d.showReference),
+                    pattern = o.optString("pattern", d.pattern),
+                    patternIntensity = o.optInt("patternIntensity", d.patternIntensity),
+                    frame = o.optString("frame", d.frame),
+                    shadow = o.optBoolean("shadow", d.shadow),
+                    ayahMark = o.optBoolean("ayahMark", d.ayahMark),
+                    lineSpacing = o.optInt("lineSpacing", d.lineSpacing),
                 )
             } catch (e: Exception) {
                 d

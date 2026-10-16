@@ -46,6 +46,16 @@
             android:paddingHorizontal="20dp"
             android:paddingBottom="16dp">
 
+            <!-- Ready-made styles -->
+            <TextView style="@style/EditorLabel" android:text="@string/presets_label" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/presetGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:selectionRequired="false"
+                app:singleSelection="false" />
+
             <!-- Content -->
             <TextView style="@style/EditorLabel" android:text="@string/content" />
 
@@ -195,6 +205,19 @@
                 android:valueFrom="9"
                 android:valueTo="30" />
 
+            <TextView
+                android:id="@+id/lineSpacingLabel"
+                style="@style/EditorLabel"
+                android:text="@string/line_spacing" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/lineSpacing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stepSize="5"
+                android:valueFrom="70"
+                android:valueTo="200" />
+
             <!-- Style -->
             <TextView style="@style/EditorLabel" android:text="@string/text_style_section" />
 
@@ -221,6 +244,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/show_reference" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/shadow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/shadow" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/ayahMark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ayah_mark" />
 
             <TextView style="@style/EditorLabel" android:text="@string/alignment" />
 
@@ -271,6 +306,38 @@
                     android:orientation="horizontal"
                     android:paddingVertical="4dp" />
             </HorizontalScrollView>
+
+            <TextView style="@style/EditorLabel" android:text="@string/pattern" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/patternGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:selectionRequired="true"
+                app:singleSelection="true" />
+
+            <TextView
+                android:id="@+id/patternIntensityLabel"
+                style="@style/EditorLabel"
+                android:text="@string/pattern_intensity" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/patternIntensity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stepSize="2"
+                android:valueFrom="4"
+                android:valueTo="80" />
+
+            <TextView style="@style/EditorLabel" android:text="@string/frame" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/frameGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:selectionRequired="true"
+                app:singleSelection="true" />
+
 
             <TextView
                 android:id="@+id/opacityLabel"
