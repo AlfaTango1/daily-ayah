@@ -95,4 +95,10 @@
     <string name="about_en_body">Uch nafar amerikalik musulmon ayol tarjimon tomonidan tayyorlangan tarjima; 1997-yilda Jidda (Saudiya Arabistoni)dagi Abul-Qasim nashriyotida chop etilgan.</string>
     <string name="about_data_title">Maʼlumotlar va shriftlar</string>
     <string name="about_data_body">Matnlar ilova yigʻilayotganda Al-Quran Cloud ochiq API (alquran.cloud) orqali olinadi va ilova ichida saqlanadi — telefoningizda hech narsa yuklab olinmaydi. Arabcha shriftlar: Google Fonts, SIL Open Font License.</string>
+    <string name="open_in_hilol">Tafsiri Hilolda ochish</string>
+    <string name="tap_action_label">Vidjet bosilganda ochiladi</string>
+    <string name="tap_hilol">Tafsiri Hilol</string>
+    <string name="tap_app">Shu ilova</string>
+    <string name="hilol_goto">%1$s, %2$d:%3$d-oyatga oʻting</string>
+    <string name="hilol_not_installed">Tafsiri Hilol oʻrnatilmagan. Google Play ochilmoqda…</string>
 </resources>

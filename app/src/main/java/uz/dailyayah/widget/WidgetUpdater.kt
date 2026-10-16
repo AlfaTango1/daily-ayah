@@ -7,9 +7,11 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.widget.RemoteViews
+import uz.dailyayah.HilolLink
 import uz.dailyayah.MainActivity
 import uz.dailyayah.R
 import uz.dailyayah.WidgetEditorActivity
+import uz.dailyayah.data.AppSettings
 import uz.dailyayah.data.QuranData
 import uz.dailyayah.style.ContentMode
 import uz.dailyayah.style.Themes
@@ -72,9 +74,11 @@ object WidgetUpdater {
         val open = Intent(context, MainActivity::class.java)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         if (verse != null) open.putExtra(EXTRA_AYAH, verse.number)
+        // ...or in Tafsiri Hilol, if the user chose that.
+        val tapIntent = if (verse != null && AppSettings.tapOpensHilol(context)) HilolLink.widgetIntent(context, verse) else open
         views.setOnClickPendingIntent(
             R.id.widget_root,
-            PendingIntent.getActivity(context, widgetId, open, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+            PendingIntent.getActivity(context, widgetId, tapIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         )
 
         // Show another verse in this widget.

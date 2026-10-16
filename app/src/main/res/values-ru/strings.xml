@@ -95,4 +95,10 @@
     <string name="about_en_body">Перевод трёх американских переводчиц-мусульманок, изданный в 1997 году издательством Abul-Qasim в Джидде (Саудовская Аравия).</string>
     <string name="about_data_title">Данные и шрифты</string>
     <string name="about_data_body">Тексты берутся из открытого API Al-Quran Cloud (alquran.cloud) при сборке приложения и хранятся внутри него — на телефоне ничего не скачивается. Арабские шрифты: Google Fonts, SIL Open Font License.</string>
+    <string name="open_in_hilol">Открыть в Tafsiri Hilol</string>
+    <string name="tap_action_label">Нажатие на виджет открывает</string>
+    <string name="tap_hilol">Tafsiri Hilol</string>
+    <string name="tap_app">Это приложение</string>
+    <string name="hilol_goto">Перейдите: %1$s, аят %2$d:%3$d</string>
+    <string name="hilol_not_installed">Tafsiri Hilol не установлен. Открываю Google Play…</string>
 </resources>

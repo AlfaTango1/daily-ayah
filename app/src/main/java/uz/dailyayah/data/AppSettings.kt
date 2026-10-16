@@ -17,6 +17,13 @@ object AppSettings {
         prefs(context).edit().putString("interval", value.name).apply()
     }
 
+    /** true: tapping a widget opens Tafsiri Hilol; false: opens this app. */
+    fun tapOpensHilol(context: Context): Boolean = prefs(context).getBoolean("tap_hilol", true)
+
+    fun setTapOpensHilol(context: Context, value: Boolean) {
+        prefs(context).edit().putBoolean("tap_hilol", value).apply()
+    }
+
     fun appStyle(context: Context): WidgetStyle =
         prefs(context).getString("app_style", null)?.let { WidgetStyle.fromJson(it) }
             ?: defaultAppStyle()

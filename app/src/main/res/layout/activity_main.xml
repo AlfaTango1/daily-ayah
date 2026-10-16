@@ -148,6 +148,13 @@
                 android:text="@string/share" />
         </LinearLayout>
 
+        <Button
+            android:id="@+id/btnHilol"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/open_in_hilol" />
+
         <!-- Settings -->
         <TextView style="@style/SectionTitle" android:text="@string/section_settings" />
 
@@ -159,6 +166,30 @@
             android:layout_height="wrap_content"
             app:selectionRequired="true"
             app:singleSelection="true" />
+
+        <TextView style="@style/EditorLabel" android:text="@string/tap_action_label" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/tapGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/tapHilol"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tap_hilol" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/tapApp"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tap_app" />
+        </com.google.android.material.chip.ChipGroup>
 
         <TextView style="@style/EditorLabel" android:text="@string/app_language" />
 

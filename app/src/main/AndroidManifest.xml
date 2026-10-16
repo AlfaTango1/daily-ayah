@@ -4,6 +4,11 @@
     <!-- Restores the hourly renewal after the phone restarts. -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <!-- Lets the app check whether Tafsiri Hilol is installed and open it. -->
+    <queries>
+        <package android:name="uz.hilal.tafsir" />
+    </queries>
+
     <application
         android:name=".DailyAyahApp"
         android:allowBackup="true"
@@ -23,6 +28,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".OpenInHilolActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity
             android:name=".AboutActivity"

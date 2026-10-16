@@ -61,6 +61,15 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, WidgetEditorActivity::class.java).putExtra(WidgetEditorActivity.EXTRA_APP_STYLE, true))
         }
 
+        binding.btnHilol.setOnClickListener { current?.let { HilolLink.open(this, it) } }
+        binding.tapGroup.check(if (AppSettings.tapOpensHilol(this)) R.id.tapHilol else R.id.tapApp)
+        binding.tapGroup.setOnCheckedStateChangeListener { _, ids ->
+            val hilol = ids.firstOrNull() == R.id.tapHilol
+            if (hilol == AppSettings.tapOpensHilol(this)) return@setOnCheckedStateChangeListener
+            AppSettings.setTapOpensHilol(this, hilol)
+            val app = applicationContext
+            Thread { runCatching { WidgetUpdater.updateAll(app) } }.start()
+        }
         binding.btnAbout.setOnClickListener { startActivity(Intent(this, AboutActivity::class.java)) }
 
         buildIntervalChips()

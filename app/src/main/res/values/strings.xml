@@ -95,4 +95,10 @@
     <string name="about_en_body">Translation by three American Muslim women translators, published in 1997 by Abul-Qasim Publishing House, Jeddah, Saudi Arabia.</string>
     <string name="about_data_title">Data and fonts</string>
     <string name="about_data_body">The texts are taken from the open Al-Quran Cloud API (alquran.cloud) when the app is built and are stored inside the app; nothing is downloaded on your phone. Arabic fonts: Google Fonts, SIL Open Font License.</string>
+    <string name="open_in_hilol">Open in Tafsiri Hilol</string>
+    <string name="tap_action_label">Tapping a widget opens</string>
+    <string name="tap_hilol">Tafsiri Hilol</string>
+    <string name="tap_app">This app</string>
+    <string name="hilol_goto">Go to %1$s, verse %2$d:%3$d</string>
+    <string name="hilol_not_installed">Tafsiri Hilol is not installed. Opening Google Play…</string>
 </resources>
