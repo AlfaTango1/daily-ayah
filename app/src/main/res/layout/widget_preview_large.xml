@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/preview_bg_emerald"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="14dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="سُورَةُ البَقَرَةِ"
+        android:textColor="#E3BC62"
+        android:textSize="12sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ"
+        android:textColor="#FFF8EA"
+        android:textSize="20sp"
+        android:fontFamily="serif" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/preview_translation"
+        android:textColor="#FFF8EA"
+        android:textSize="13sp"
+        android:layout_marginTop="6dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Al-Baqara 2:255"
+        android:textColor="#E3BC62"
+        android:textSize="11sp"
+        android:textStyle="italic" />
+</LinearLayout>

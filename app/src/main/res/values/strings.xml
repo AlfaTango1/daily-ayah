@@ -1,24 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Daily Ayah</string>
-    <string name="widget_name">Verse of the day</string>
-    <string name="widget_description">A new Quran verse on your home screen every day</string>
-    <string name="tagline">One verse a day, close at hand</string>
-    <string name="verse_of_the_day">Verse of the day</string>
-    <string name="random_verse">Random verse</string>
-    <string name="mode_english">English</string>
-    <string name="mode_russian">Русский</string>
-    <string name="mode_both">Both</string>
-    <string name="today">Today</string>
+    <string name="loading">Loading…</string>
+
+    <!-- Main screen -->
+    <string name="renews">New verse: %1$s</string>
+    <string name="verse_now">Current verse</string>
+    <string name="browsing">Browsing</string>
+    <string name="prev">Previous</string>
+    <string name="next">Next</string>
+    <string name="now">Now</string>
     <string name="random">Random</string>
     <string name="share">Share</string>
     <string name="copy">Copy</string>
     <string name="copied">Copied</string>
-    <string name="refresh">Refresh</string>
-    <string name="retry">Try again</string>
-    <string name="add_widget">Add widget to home screen</string>
+    <string name="section_settings">Settings</string>
+    <string name="renew_label">Show a new verse</string>
+    <string name="text_style">Fonts and text style</string>
+    <string name="section_widgets">Home-screen widgets</string>
+    <string name="widgets_hint">Add a widget, then tap ✎ on it (or Edit below) to change its fonts, colours and content.</string>
+    <string name="add">Add</string>
+    <string name="edit">Edit</string>
+    <string name="your_widgets">Your widgets</string>
+    <string name="no_widgets">No widgets on your home screen yet.</string>
     <string name="add_widget_manual">Long-press your home screen, tap Widgets and choose Daily Ayah.</string>
-    <string name="widget_loading">Open the app once with internet to load today\'s verse.</string>
-    <string name="error_offline">Could not load the verse. Check your internet connection.</string>
-    <string name="attribution">Arabic text: Tanzil (Uthmani). Translations: Sahih International, Elmir Kuliev. Data: alquran.cloud</string>
+    <string name="attribution">Arabic text: Tanzil (Uthmani). Translations: Sahih International, Elmir Kuliev. Data: alquran.cloud. Arabic fonts: Google Fonts (SIL Open Font License).</string>
+
+    <!-- Intervals -->
+    <string name="interval_30m">Every 30 minutes</string>
+    <string name="interval_1h">Every hour</string>
+    <string name="interval_3h">Every 3 hours</string>
+    <string name="interval_6h">Every 6 hours</string>
+    <string name="interval_daily">Once a day</string>
+
+    <!-- Widget types -->
+    <string name="widget_large">Verse</string>
+    <string name="widget_large_desc">Arabic with translation</string>
+    <string name="widget_compact">Verse (small)</string>
+    <string name="widget_compact_desc">Translation only, compact</string>
+    <string name="widget_arabic">Arabic calligraphy</string>
+    <string name="widget_arabic_desc">Arabic text only, large</string>
+    <string name="widget_dhikr">My dhikr</string>
+    <string name="widget_dhikr_desc">Your own dhikr, dua or reminder</string>
+    <string name="next_verse">Another verse</string>
+    <string name="edit_widget">Edit widget</string>
+    <string name="preview_translation">A new verse of the Quran, every hour</string>
+    <string name="custom_text_empty">Tap ✎ to write your text</string>
+
+    <!-- Editor -->
+    <string name="editor_title_widget">Edit widget</string>
+    <string name="editor_title_app">Fonts and text style</string>
+    <string name="content">Content</string>
+    <string name="content_both">Arabic + translation</string>
+    <string name="content_arabic">Arabic</string>
+    <string name="content_translation">Translation</string>
+    <string name="content_custom">My text</string>
+    <string name="translation">Translation</string>
+    <string name="mode_english">English</string>
+    <string name="mode_russian">Русский</string>
+    <string name="mode_both">Both</string>
+    <string name="custom_text_hint">Your text (dhikr, dua, reminder)</string>
+    <string name="arabic_font">Arabic font</string>
+    <string name="text_font">Translation font</string>
+    <string name="arabic_size">Arabic text size</string>
+    <string name="text_size">Translation text size</string>
+    <string name="text_style_section">Text style</string>
+    <string name="bold">Bold</string>
+    <string name="italic">Italic (translation)</string>
+    <string name="alignment">Alignment</string>
+    <string name="align_start">Start</string>
+    <string name="align_center">Centre</string>
+    <string name="align_end">End</string>
+    <string name="colours">Colours</string>
+    <string name="opacity">Background opacity</string>
+    <string name="corners">Corner roundness</string>
+    <string name="show_surah">Show surah name</string>
+    <string name="show_reference">Show reference</string>
+    <string name="save">Save</string>
+    <string name="reset">Reset</string>
 </resources>

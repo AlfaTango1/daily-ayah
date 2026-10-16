@@ -1,11 +1,11 @@
 package uz.dailyayah
 
 import android.app.Application
-import uz.dailyayah.work.DailyVerseWorker
+import uz.dailyayah.widget.RenewScheduler
 
 class DailyAyahApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        DailyVerseWorker.schedulePeriodic(this)
+        RenewScheduler.schedule(this)
     }
 }

@@ -18,210 +18,193 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/verse_of_the_day"
+            android:text="@string/verse_now"
             android:textColor="@color/primary"
             android:textSize="26sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@string/tagline"
             android:textColor="@color/text_muted"
             android:textSize="14sp" />
-
-        <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/modeGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:selectionRequired="true"
-            app:singleSelection="true">
-
-            <Button
-                android:id="@+id/mode_en"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/mode_english" />
-
-            <Button
-                android:id="@+id/mode_ru"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/mode_russian" />
-
-            <Button
-                android:id="@+id/mode_both"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/mode_both" />
-        </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:indeterminate="true"
-            android:visibility="gone" />
+            android:indeterminate="true" />
 
+        <!-- Verse card; its colours and fonts follow "Fonts and text style". -->
         <LinearLayout
-            android:id="@+id/errorBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/error_offline"
-                android:textColor="@color/text" />
-
-            <Button
-                android:id="@+id/btnRetry"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/retry" />
-        </LinearLayout>
-
-        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:visibility="gone"
-            app:cardBackgroundColor="@color/surface"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="0dp"
-            app:strokeColor="@color/accent"
-            app:strokeWidth="1dp">
+            android:orientation="vertical"
+            android:padding="22dp"
+            android:visibility="invisible">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/surahName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:gravity="center"
+                android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/surahArabic"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@color/accent"
-                    android:textSize="18sp" />
+            <TextView
+                android:id="@+id/arabic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:lineSpacingMultiplier="1.45"
+                android:textDirection="rtl"
+                android:textIsSelectable="true" />
 
-                <TextView
-                    android:id="@+id/arabic"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="serif"
-                    android:gravity="center"
-                    android:lineSpacingMultiplier="1.5"
-                    android:textColor="@color/text"
-                    android:textDirection="rtl"
-                    android:textIsSelectable="true"
-                    android:textSize="26sp" />
+            <TextView
+                android:id="@+id/translation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:lineSpacingMultiplier="1.25"
+                android:textIsSelectable="true" />
 
-                <View
-                    android:layout_width="48dp"
-                    android:layout_height="2dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginVertical="16dp"
-                    android:background="@color/accent" />
-
-                <TextView
-                    android:id="@+id/translation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:lineSpacingMultiplier="1.3"
-                    android:textColor="@color/text"
-                    android:textIsSelectable="true"
-                    android:textSize="17sp" />
-
-                <TextView
-                    android:id="@+id/reference"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:gravity="end"
-                    android:textColor="@color/text_muted"
-                    android:textSize="14sp"
-                    android:textStyle="italic" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:gravity="end"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/btnCopy"
-                        style="?attr/borderlessButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/copy" />
-
-                    <Button
-                        android:id="@+id/btnShare"
-                        style="?attr/borderlessButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/share" />
-                </LinearLayout>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/reference"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="end"
+                android:textSize="14sp"
+                android:textStyle="italic" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnToday"
+                android:id="@+id/btnPrev"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="6dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                android:text="@string/today" />
+                android:text="@string/prev" />
+
+            <Button
+                android:id="@+id/btnNow"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="1"
+                android:text="@string/now" />
+
+            <Button
+                android:id="@+id/btnNext"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"
+                android:text="@string/next" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnRandom"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
                 android:text="@string/random" />
+
+            <Button
+                android:id="@+id/btnCopy"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="1"
+                android:text="@string/copy" />
+
+            <Button
+                android:id="@+id/btnShare"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"
+                android:text="@string/share" />
         </LinearLayout>
 
+        <!-- Settings -->
+        <TextView style="@style/SectionTitle" android:text="@string/section_settings" />
+
+        <TextView style="@style/EditorLabel" android:layout_marginTop="4dp" android:text="@string/renew_label" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/intervalGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:selectionRequired="true"
+            app:singleSelection="true" />
+
         <Button
-            android:id="@+id/btnAddWidget"
+            android:id="@+id/btnTextStyle"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/add_widget" />
+            android:layout_marginTop="12dp"
+            android:text="@string/text_style" />
+
+        <!-- Widgets -->
+        <TextView style="@style/SectionTitle" android:text="@string/section_widgets" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:text="@string/widgets_hint"
+            android:textColor="@color/text_muted"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/kindsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical" />
+
+        <TextView style="@style/EditorLabel" android:text="@string/your_widgets" />
+
+        <TextView
+            android:id="@+id/noWidgets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_widgets"
+            android:textColor="@color/text_muted"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/placedContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
             android:gravity="center"
             android:text="@string/attribution"
             android:textColor="@color/text_muted"

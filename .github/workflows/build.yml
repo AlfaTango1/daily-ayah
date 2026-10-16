@@ -22,9 +22,19 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
 
       - name: Build debug APK
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug --stacktrace
+          set -o pipefail
+          ./gradlew assembleDebug --stacktrace 2>&1 | tee build.log
+
+      - name: Report build errors
+        if: failure()
+        run: |
+          grep -E "^e: |error:|ERROR:|What went wrong|AAPT|Execution failed" -A2 build.log \
+            | grep -v '^--$' | head -40 \
+            | while IFS= read -r line; do echo "::error::${line}"; done
 
       - name: Rename APK
         run: cp app/build/outputs/apk/debug/app-debug.apk DailyAyah-${{ github.run_number }}.apk

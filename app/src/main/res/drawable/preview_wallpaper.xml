@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Neutral "home screen" backdrop behind the widget preview. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:endColor="#3A4A5A"
+        android:startColor="#8DA3B5" />
+</shape>

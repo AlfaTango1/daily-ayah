@@ -1,37 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Restores the hourly renewal after the phone restarts. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".DailyAyahApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.DailyAyah">
 
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <receiver
-            android:name=".widget.VerseWidgetProvider"
+        <activity
+            android:name=".WidgetEditorActivity"
             android:exported="true"
-            android:label="@string/widget_name">
+            android:excludeFromRecents="true"
+            android:taskAffinity="uz.dailyayah.editor"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".widget.VerseWidgetLarge"
+            android:exported="true"
+            android:label="@string/widget_large">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/verse_widget_info" />
+                android:resource="@xml/widget_large_info" />
+        </receiver>
+
+        <receiver
+            android:name=".widget.VerseWidgetCompact"
+            android:exported="true"
+            android:label="@string/widget_compact">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_compact_info" />
+        </receiver>
+
+        <receiver
+            android:name=".widget.ArabicWidget"
+            android:exported="true"
+            android:label="@string/widget_arabic">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_arabic_info" />
+        </receiver>
+
+        <receiver
+            android:name=".widget.DhikrWidget"
+            android:exported="true"
+            android:label="@string/widget_dhikr">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_dhikr_info" />
+        </receiver>
+
+        <receiver
+            android:name=".widget.UpdateReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
         </receiver>
 
     </application>

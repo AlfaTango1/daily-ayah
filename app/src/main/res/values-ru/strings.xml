@@ -1,24 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Аят дня</string>
-    <string name="widget_name">Аят дня</string>
-    <string name="widget_description">Новый аят Корана на главном экране каждый день</string>
-    <string name="tagline">Один аят в день — всегда рядом</string>
-    <string name="verse_of_the_day">Аят дня</string>
-    <string name="random_verse">Случайный аят</string>
-    <string name="mode_english">English</string>
-    <string name="mode_russian">Русский</string>
-    <string name="mode_both">Оба</string>
-    <string name="today">Сегодня</string>
+    <string name="loading">Загрузка…</string>
+
+    <!-- Main screen -->
+    <string name="renews">Новый аят: %1$s</string>
+    <string name="verse_now">Текущий аят</string>
+    <string name="browsing">Просмотр</string>
+    <string name="prev">Назад</string>
+    <string name="next">Далее</string>
+    <string name="now">Сейчас</string>
     <string name="random">Случайный</string>
     <string name="share">Поделиться</string>
     <string name="copy">Копировать</string>
     <string name="copied">Скопировано</string>
-    <string name="refresh">Обновить</string>
-    <string name="retry">Повторить</string>
-    <string name="add_widget">Добавить виджет на экран</string>
+    <string name="section_settings">Настройки</string>
+    <string name="renew_label">Показывать новый аят</string>
+    <string name="text_style">Шрифты и стиль текста</string>
+    <string name="section_widgets">Виджеты на экран</string>
+    <string name="widgets_hint">Добавьте виджет, затем нажмите ✎ на нём (или «Изменить» ниже), чтобы настроить шрифты, цвета и содержание.</string>
+    <string name="add">Добавить</string>
+    <string name="edit">Изменить</string>
+    <string name="your_widgets">Ваши виджеты</string>
+    <string name="no_widgets">На главном экране пока нет виджетов.</string>
     <string name="add_widget_manual">Нажмите и удерживайте главный экран, выберите «Виджеты» и найдите «Аят дня».</string>
-    <string name="widget_loading">Откройте приложение с интернетом, чтобы загрузить аят дня.</string>
-    <string name="error_offline">Не удалось загрузить аят. Проверьте подключение к интернету.</string>
-    <string name="attribution">Арабский текст: Tanzil (Усмани). Переводы: Sahih International, Эльмир Кулиев. Данные: alquran.cloud</string>
+    <string name="attribution">Арабский текст: Tanzil (Усмани). Переводы: Sahih International, Эльмир Кулиев. Данные: alquran.cloud. Арабские шрифты: Google Fonts (SIL Open Font License).</string>
+
+    <!-- Intervals -->
+    <string name="interval_30m">Каждые 30 минут</string>
+    <string name="interval_1h">Каждый час</string>
+    <string name="interval_3h">Каждые 3 часа</string>
+    <string name="interval_6h">Каждые 6 часов</string>
+    <string name="interval_daily">Раз в день</string>
+
+    <!-- Widget types -->
+    <string name="widget_large">Аят</string>
+    <string name="widget_large_desc">Арабский текст с переводом</string>
+    <string name="widget_compact">Аят (малый)</string>
+    <string name="widget_compact_desc">Только перевод, компактно</string>
+    <string name="widget_arabic">Арабская каллиграфия</string>
+    <string name="widget_arabic_desc">Только арабский текст, крупно</string>
+    <string name="widget_dhikr">Мой зикр</string>
+    <string name="widget_dhikr_desc">Ваш зикр, дуа или напоминание</string>
+    <string name="next_verse">Другой аят</string>
+    <string name="edit_widget">Изменить виджет</string>
+    <string name="preview_translation">Новый аят Корана каждый час</string>
+    <string name="custom_text_empty">Нажмите ✎, чтобы написать текст</string>
+
+    <!-- Editor -->
+    <string name="editor_title_widget">Настройка виджета</string>
+    <string name="editor_title_app">Шрифты и стиль текста</string>
+    <string name="content">Содержание</string>
+    <string name="content_both">Арабский + перевод</string>
+    <string name="content_arabic">Арабский</string>
+    <string name="content_translation">Перевод</string>
+    <string name="content_custom">Свой текст</string>
+    <string name="translation">Перевод</string>
+    <string name="mode_english">English</string>
+    <string name="mode_russian">Русский</string>
+    <string name="mode_both">Оба</string>
+    <string name="custom_text_hint">Ваш текст (зикр, дуа, напоминание)</string>
+    <string name="arabic_font">Арабский шрифт</string>
+    <string name="text_font">Шрифт перевода</string>
+    <string name="arabic_size">Размер арабского текста</string>
+    <string name="text_size">Размер перевода</string>
+    <string name="text_style_section">Стиль текста</string>
+    <string name="bold">Жирный</string>
+    <string name="italic">Курсив (перевод)</string>
+    <string name="alignment">Выравнивание</string>
+    <string name="align_start">В начале</string>
+    <string name="align_center">По центру</string>
+    <string name="align_end">В конце</string>
+    <string name="colours">Цвета</string>
+    <string name="opacity">Прозрачность фона</string>
+    <string name="corners">Скругление углов</string>
+    <string name="show_surah">Название суры</string>
+    <string name="show_reference">Ссылка на аят</string>
+    <string name="save">Сохранить</string>
+    <string name="reset">Сбросить</string>
 </resources>

@@ -1,42 +1,42 @@
 # Daily Ayah (Аят дня)
 
-An Android app that shows one Quran verse a day, in the app and in a home-screen widget.
-Arabic (Uthmani script) with an English (Sahih International) or Russian (Elmir Kuliev) translation, or both.
+An Android app that shows a Quran verse on your home screen and renews it automatically
+(every hour by default). Arabic (Uthmani script) with an English (Sahih International)
+or Russian (Elmir Kuliev) translation, or both. Works fully offline.
 
 ## Features
-- Verse of the day: the same verse for everyone on a given date, changing at midnight
-- Resizable home-screen widget with a refresh button; tap it to open the app
-- Works offline after the first load (the last verse is cached)
-- Random verse, copy, share
-- English / Russian / both translations; app interface in English and Russian
-- Light and dark mode
+- **New verse every hour** — or every 30 min / 3 h / 6 h / once a day (Settings in the app)
+- **Four widget types**: Verse (Arabic + translation), Verse small (translation), Arabic calligraphy, My dhikr (your own text)
+- **Every widget is editable**: tap ✎ on the widget (or *Edit* in the app) to change
+  - content (Arabic, translation, both, or your own text)
+  - Arabic font (Amiri, Scheherazade, Noto Naskh, Lateef, Noto Kufi, Reem Kufi, Ruqaa)
+  - translation font (Sans, Serif, Light, Medium, Condensed, Mono, Casual, Cursive)
+  - text sizes, bold, italic, alignment
+  - 10 colour themes, background opacity, corner roundness
+  - surah name and reference on/off
+- Tap ↻ on a widget for another verse; tap the widget to open it in the app
+- In the app: browse previous/next verses, random verse, copy, share; its own font/style settings
+- English and Russian interface, light and dark mode
 
-## Build and install
-1. Install **Android Studio** (latest stable) from developer.android.com/studio.
-2. Unzip this folder and choose **File → Open** → select the `DailyAyah` folder.
-3. Wait for Gradle sync to finish (first time it downloads the tools, needs internet).
-   If Android Studio offers to upgrade the Android Gradle Plugin, accept it.
-4. Connect your phone with USB debugging on (Settings → About phone → tap *Build number* 7 times →
-   Developer options → USB debugging), then press **Run ▶**.
-5. To get an installable file: **Build → Build App Bundle(s) / APK(s) → Build APK(s)**.
-   The APK appears in `app/build/outputs/apk/debug/`.
+## Download
+Every push to `main` is built by GitHub Actions; the APK is attached to the newest entry under **Releases**.
 
-## Add the widget
-In the app tap **Add widget to home screen**, or long-press the home screen → Widgets → *Daily Ayah*.
+## Build it yourself
+1. Install Android Studio, then **File → Open** this folder.
+2. Press **Run ▶** (first build needs internet: it downloads the Quran text and fonts into `app/src/main/assets`).
 
 ## How it works
 | File | Role |
 |---|---|
-| `data/QuranApi.kt` | Downloads an ayah from api.alquran.cloud (Arabic + both translations in one request) |
-| `data/VerseRepository.kt` | Picks the day's verse from the date, caches it, stores the translation setting |
-| `work/DailyVerseWorker.kt` | Background job (every 3 h, when online) that refreshes the verse and widgets |
-| `widget/VerseWidgetProvider.kt` | Draws the widget |
+| `app/build.gradle.kts` | `downloadQuranAssets` task: fetches the Quran text (api.alquran.cloud) and fonts (Google Fonts) before the build |
+| `data/QuranData.kt` | Reads the bundled text; verse lookup by number |
+| `data/VerseSchedule.kt` | Which verse is shown in the current hour/period |
+| `widget/WidgetRenderer.kt` | Draws a widget (fonts, colours, auto-fit text) into an image |
+| `widget/Widgets.kt`, `WidgetKind.kt` | The four widget types |
+| `widget/RenewScheduler.kt` | Alarm at the start of each period to refresh all widgets |
+| `WidgetEditorActivity.kt` | Style editor with live preview (widgets and app) |
 | `MainActivity.kt` | Main screen |
 
-To change translations, edit `ED_ENGLISH` / `ED_RUSSIAN` in `QuranApi.kt`
-(list of options: https://api.alquran.cloud/v1/edition/language/ru, `/en`, `/uz`).
-
 ## Before publishing on Google Play
-- Change `applicationId` in `app/build.gradle.kts` to your own unique id.
-- Create a signing key (Build → Generate Signed App Bundle).
+- Change `applicationId` in `app/build.gradle.kts` to your own unique id and sign a release build.
 - Check the licence terms of the translations you ship.

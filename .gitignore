@@ -8,3 +8,7 @@
 /captures/
 .externalNativeBuild/
 .cxx/
+
+# Downloaded at build time
+/app/src/main/assets/quran/
+/app/src/main/assets/fonts/
