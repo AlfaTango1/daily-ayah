@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#0F4C4A</color>
+    <color name="accent">#B8892B</color>
+    <color name="bg">#F7F2E7</color>
+    <color name="surface">#FFFDF8</color>
+    <color name="text">#1E2A28</color>
+    <color name="text_muted">#6B726E</color>
+
+    <!-- The widget keeps the same dark-green look in light and dark mode. -->
+    <color name="widget_bg">#F20F3B39</color>
+    <color name="widget_text">#FFF8EA</color>
+    <color name="widget_accent">#E3BC62</color>
+
+    <color name="icon_bg">#0F4C4A</color>
+</resources>

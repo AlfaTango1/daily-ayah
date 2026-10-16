@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Crescent above an open book, drawn in the centre safe zone of a 108dp adaptive icon. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Crescent: outer half-circle on the left, flatter arc back to the top. -->
+    <path
+        android:fillColor="#E3BC62"
+        android:pathData="M54,19 A11,11 0 0,0 54,41 A14,14 0 0,1 54,19 Z" />
+    <!-- Open book: two pages meeting at the spine. -->
+    <path
+        android:fillColor="#FFF8EA"
+        android:pathData="M53,50 C46,46 38,45 32,46 L32,72 C38,71 46,72 53,76 Z" />
+    <path
+        android:fillColor="#FFF8EA"
+        android:pathData="M55,50 C62,46 70,45 76,46 L76,72 C70,71 62,72 55,76 Z" />
+</vector>

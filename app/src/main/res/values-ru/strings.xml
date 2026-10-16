@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Аят дня</string>
+    <string name="widget_name">Аят дня</string>
+    <string name="widget_description">Новый аят Корана на главном экране каждый день</string>
+    <string name="tagline">Один аят в день — всегда рядом</string>
+    <string name="verse_of_the_day">Аят дня</string>
+    <string name="random_verse">Случайный аят</string>
+    <string name="mode_english">English</string>
+    <string name="mode_russian">Русский</string>
+    <string name="mode_both">Оба</string>
+    <string name="today">Сегодня</string>
+    <string name="random">Случайный</string>
+    <string name="share">Поделиться</string>
+    <string name="copy">Копировать</string>
+    <string name="copied">Скопировано</string>
+    <string name="refresh">Обновить</string>
+    <string name="retry">Повторить</string>
+    <string name="add_widget">Добавить виджет на экран</string>
+    <string name="add_widget_manual">Нажмите и удерживайте главный экран, выберите «Виджеты» и найдите «Аят дня».</string>
+    <string name="widget_loading">Откройте приложение с интернетом, чтобы загрузить аят дня.</string>
+    <string name="error_offline">Не удалось загрузить аят. Проверьте подключение к интернету.</string>
+    <string name="attribution">Арабский текст: Tanzil (Усмани). Переводы: Sahih International, Эльмир Кулиев. Данные: alquran.cloud</string>
+</resources>

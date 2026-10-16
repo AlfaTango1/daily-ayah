@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Daily Ayah</string>
+    <string name="widget_name">Verse of the day</string>
+    <string name="widget_description">A new Quran verse on your home screen every day</string>
+    <string name="tagline">One verse a day, close at hand</string>
+    <string name="verse_of_the_day">Verse of the day</string>
+    <string name="random_verse">Random verse</string>
+    <string name="mode_english">English</string>
+    <string name="mode_russian">Русский</string>
+    <string name="mode_both">Both</string>
+    <string name="today">Today</string>
+    <string name="random">Random</string>
+    <string name="share">Share</string>
+    <string name="copy">Copy</string>
+    <string name="copied">Copied</string>
+    <string name="refresh">Refresh</string>
+    <string name="retry">Try again</string>
+    <string name="add_widget">Add widget to home screen</string>
+    <string name="add_widget_manual">Long-press your home screen, tap Widgets and choose Daily Ayah.</string>
+    <string name="widget_loading">Open the app once with internet to load today\'s verse.</string>
+    <string name="error_offline">Could not load the verse. Check your internet connection.</string>
+    <string name="attribution">Arabic text: Tanzil (Uthmani). Translations: Sahih International, Elmir Kuliev. Data: alquran.cloud</string>
+</resources>
