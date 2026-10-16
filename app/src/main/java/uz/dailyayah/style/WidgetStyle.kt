@@ -1,19 +1,34 @@
 package uz.dailyayah.style
 
+import org.json.JSONArray
 import org.json.JSONObject
+import uz.dailyayah.R
 import uz.dailyayah.data.Verse
 import java.util.Locale
 
 enum class ContentMode { ARABIC_AND_TRANSLATION, ARABIC_ONLY, TRANSLATION_ONLY, CUSTOM_TEXT }
 
-enum class TranslationMode { ENGLISH, RUSSIAN, BOTH }
+/** Translations the app ships. Order here = order shown when several are selected. */
+enum class Lang(val labelRes: Int) {
+    UZ_LATN(R.string.lang_uz_latn),
+    UZ_CYRL(R.string.lang_uz_cyrl),
+    RU(R.string.lang_ru),
+    EN(R.string.lang_en);
+
+    fun textOf(verse: Verse): String = when (this) {
+        UZ_LATN -> verse.uzbekLatin
+        UZ_CYRL -> verse.uzbekCyrillic
+        RU -> verse.russian
+        EN -> verse.english
+    }
+}
 
 enum class TextAlign { START, CENTER, END }
 
 /** Everything the user can change about how a verse looks (per widget, or for the app). */
 data class WidgetStyle(
     val content: ContentMode = ContentMode.ARABIC_AND_TRANSLATION,
-    val translation: TranslationMode = TranslationMode.ENGLISH,
+    val translations: List<Lang> = listOf(Lang.EN),
     val customText: String = "",
     val arabicFont: String = "amiri",
     val textFont: String = "sans",
@@ -28,15 +43,15 @@ data class WidgetStyle(
     val showSurahName: Boolean = true,
     val showReference: Boolean = true,
 ) {
-    fun translationOf(verse: Verse): String = when (translation) {
-        TranslationMode.ENGLISH -> verse.english
-        TranslationMode.RUSSIAN -> verse.russian
-        TranslationMode.BOTH -> "${verse.english}\n\n${verse.russian}"
-    }
+    /** Selected translations, in a fixed order, separated by a blank line. */
+    fun translationOf(verse: Verse): String =
+        Lang.entries.filter { it in translations }
+            .ifEmpty { listOf(Lang.EN) }
+            .joinToString("\n\n") { it.textOf(verse) }
 
     fun toJson(): String = JSONObject()
         .put("content", content.name)
-        .put("translation", translation.name)
+        .put("translations", JSONArray(translations.map { it.name }))
         .put("customText", customText)
         .put("arabicFont", arabicFont)
         .put("textFont", textFont)
@@ -53,20 +68,39 @@ data class WidgetStyle(
         .toString()
 
     companion object {
-        /** Russian if the phone is in Russian, otherwise English. */
-        fun defaultTranslation(): TranslationMode =
-            if (Locale.getDefault().language == "ru") TranslationMode.RUSSIAN else TranslationMode.ENGLISH
+        /** Uzbek (Latin) on Uzbek phones, Russian on Russian phones, otherwise English. */
+        fun defaultTranslation(): List<Lang> = when (Locale.getDefault().language) {
+            "uz" -> listOf(Lang.UZ_LATN)
+            "ru" -> listOf(Lang.RU)
+            else -> listOf(Lang.EN)
+        }
 
         private inline fun <reified T : Enum<T>> enumOr(value: String?, fallback: T): T =
             runCatching { enumValueOf<T>(value!!) }.getOrDefault(fallback)
 
+        private fun readTranslations(o: JSONObject, fallback: List<Lang>): List<Lang> {
+            o.optJSONArray("translations")?.let { array ->
+                val list = (0 until array.length()).mapNotNull { i ->
+                    runCatching { Lang.valueOf(array.getString(i)) }.getOrNull()
+                }
+                if (list.isNotEmpty()) return list
+            }
+            // Settings saved by version 2 ("translation": ENGLISH / RUSSIAN / BOTH).
+            return when (o.optString("translation")) {
+                "ENGLISH" -> listOf(Lang.EN)
+                "RUSSIAN" -> listOf(Lang.RU)
+                "BOTH" -> listOf(Lang.RU, Lang.EN)
+                else -> fallback
+            }
+        }
+
         fun fromJson(json: String): WidgetStyle {
-            val d = WidgetStyle()
+            val d = WidgetStyle(translations = defaultTranslation())
             return try {
                 val o = JSONObject(json)
                 WidgetStyle(
                     content = enumOr(o.optString("content"), d.content),
-                    translation = enumOr(o.optString("translation"), d.translation),
+                    translations = readTranslations(o, d.translations),
                     customText = o.optString("customText", d.customText),
                     arabicFont = o.optString("arabicFont", d.arabicFont),
                     textFont = o.optString("textFont", d.textFont),

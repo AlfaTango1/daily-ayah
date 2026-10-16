@@ -14,6 +14,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Dispatchers
@@ -59,7 +61,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, WidgetEditorActivity::class.java).putExtra(WidgetEditorActivity.EXTRA_APP_STYLE, true))
         }
 
+        binding.btnAbout.setOnClickListener { startActivity(Intent(this, AboutActivity::class.java)) }
+
         buildIntervalChips()
+        buildLanguageChips()
         buildWidgetKinds()
         handleOpenIntent(intent)
     }
@@ -197,6 +202,36 @@ class MainActivity : AppCompatActivity() {
                 runCatching { WidgetUpdater.updateAll(app) }
             }.start()
             if (following) showScheduled() else current?.let { show(it) }
+        }
+    }
+
+    /** In-app language: phone default, Uzbek, Russian or English. */
+    private fun buildLanguageChips() {
+        val options = listOf(
+            "" to getString(R.string.lang_system),
+            "uz" to "Oʻzbekcha",
+            "ru" to "Русский",
+            "en" to "English",
+        )
+        val current = AppCompatDelegate.getApplicationLocales().toLanguageTags().substringBefore('-')
+        val tags = HashMap<Int, String>()
+        for ((tag, label) in options) {
+            val chip = layoutInflater.inflate(R.layout.item_chip, binding.languageGroup, false) as Chip
+            chip.id = View.generateViewId()
+            chip.text = label
+            binding.languageGroup.addView(chip)
+            tags[chip.id] = tag
+            if (tag == current) binding.languageGroup.check(chip.id)
+        }
+        binding.languageGroup.setOnCheckedStateChangeListener { _, ids ->
+            val tag = ids.firstOrNull()?.let { tags[it] } ?: return@setOnCheckedStateChangeListener
+            if (tag == current) return@setOnCheckedStateChangeListener
+            val app = applicationContext
+            Thread { runCatching { WidgetUpdater.updateAll(app) } }.start()
+            // Recreates the screens in the new language.
+            AppCompatDelegate.setApplicationLocales(
+                if (tag.isEmpty()) LocaleListCompat.getEmptyLocaleList() else LocaleListCompat.forLanguageTags(tag)
+            )
         }
     }
 

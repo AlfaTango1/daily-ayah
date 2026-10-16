@@ -23,7 +23,7 @@ import uz.dailyayah.style.ContentMode
 import uz.dailyayah.style.Fonts
 import uz.dailyayah.style.TextAlign
 import uz.dailyayah.style.Themes
-import uz.dailyayah.style.TranslationMode
+import uz.dailyayah.style.Lang
 import uz.dailyayah.style.WidgetStyle
 import uz.dailyayah.widget.WidgetKind
 import uz.dailyayah.widget.WidgetRenderer
@@ -108,6 +108,15 @@ class WidgetEditorActivity : AppCompatActivity() {
         return chip
     }
 
+    private val translationChips: Map<Lang, Int> by lazy {
+        mapOf(
+            Lang.UZ_LATN to R.id.trUzLatn,
+            Lang.UZ_CYRL to R.id.trUzCyrl,
+            Lang.RU to R.id.trRu,
+            Lang.EN to R.id.trEn,
+        )
+    }
+
     private val arabicChipKeys = HashMap<Int, String>()
     private val textChipKeys = HashMap<Int, String>()
 
@@ -170,13 +179,10 @@ class WidgetEditorActivity : AppCompatActivity() {
             }
         )
         binding.customText.setText(style.customText)
-        binding.translationGroup.check(
-            when (style.translation) {
-                TranslationMode.ENGLISH -> R.id.trEn
-                TranslationMode.RUSSIAN -> R.id.trRu
-                TranslationMode.BOTH -> R.id.trBoth
-            }
-        )
+        binding.translationGroup.clearCheck()
+        for ((lang, chipId) in translationChips) {
+            if (lang in style.translations) binding.translationGroup.check(chipId)
+        }
         (arabicChipKeys.entries.firstOrNull { it.value == style.arabicFont } ?: arabicChipKeys.entries.firstOrNull())
             ?.let { binding.arabicFontGroup.check(it.key) }
         (textChipKeys.entries.firstOrNull { it.value == style.textFont } ?: textChipKeys.entries.firstOrNull())
@@ -216,14 +222,10 @@ class WidgetEditorActivity : AppCompatActivity() {
         binding.customText.doAfterTextChanged {
             if (controlsReady) change(style.copy(customText = it?.toString().orEmpty()))
         }
-        binding.translationGroup.addOnButtonCheckedListener { _, id, checked ->
-            if (!controlsReady || !checked) return@addOnButtonCheckedListener
-            val mode = when (id) {
-                R.id.trRu -> TranslationMode.RUSSIAN
-                R.id.trBoth -> TranslationMode.BOTH
-                else -> TranslationMode.ENGLISH
-            }
-            change(style.copy(translation = mode))
+        binding.translationGroup.setOnCheckedStateChangeListener { _, ids ->
+            if (!controlsReady || ids.isEmpty()) return@setOnCheckedStateChangeListener
+            val selected = translationChips.filter { it.value in ids }.map { it.key }
+            change(style.copy(translations = selected))
         }
         binding.arabicFontGroup.setOnCheckedStateChangeListener { _, ids ->
             val key = ids.firstOrNull()?.let { arabicChipKeys[it] } ?: return@setOnCheckedStateChangeListener

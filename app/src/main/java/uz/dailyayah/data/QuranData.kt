@@ -24,6 +24,8 @@ object QuranData {
         val arabic: List<String>,
         val english: List<String>,
         val russian: List<String>,
+        val uzbekLatin: List<String>,
+        val uzbekCyrillic: List<String>,
         val surahs: List<Surah>,
         val surahOfAyah: IntArray,      // index: global ayah number (1-based)
         val firstAyahOfSurah: IntArray, // index: surah number (1-based)
@@ -43,6 +45,8 @@ object QuranData {
             val arabic = lines("ar.txt")
             val english = lines("en.txt")
             val russian = lines("ru.txt")
+            val uzbekCyrillic = lines("uz.txt")
+            val uzbekLatin = lines("uz_lat.txt")
 
             val json = assets.open("quran/surahs.json").bufferedReader(Charsets.UTF_8).use { it.readText() }
             val array = JSONArray(json)
@@ -66,7 +70,7 @@ object QuranData {
                 repeat(s.ayahCount) { surahOfAyah[n++] = s.number }
             }
 
-            return Store(arabic, english, russian, surahs, surahOfAyah, firstAyah).also { store = it }
+            return Store(arabic, english, russian, uzbekLatin, uzbekCyrillic, surahs, surahOfAyah, firstAyah).also { store = it }
         }
     }
 
@@ -94,6 +98,8 @@ object QuranData {
             arabic = s.arabic.getOrElse(n - 1) { "" },
             english = s.english.getOrElse(n - 1) { "" },
             russian = s.russian.getOrElse(n - 1) { "" },
+            uzbekLatin = s.uzbekLatin.getOrElse(n - 1) { "" },
+            uzbekCyrillic = s.uzbekCyrillic.getOrElse(n - 1) { "" },
         )
     }
 }

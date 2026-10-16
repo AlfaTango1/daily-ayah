@@ -1,8 +1,20 @@
 # Daily Ayah (Аят дня)
 
 An Android app that shows a Quran verse on your home screen and renews it automatically
-(every hour by default). Arabic (Uthmani script) with an English (Sahih International)
-or Russian (Elmir Kuliev) translation, or both. Works fully offline.
+(every hour by default). Arabic (Uthmani script) with Uzbek, Russian and English translations.
+Interface in Uzbek, Russian and English. Works fully offline.
+
+## Translation sources
+| Language | Translation | Notes |
+|---|---|---|
+| Arabic | Uthmani text, Tanzil Project (tanzil.net) | |
+| Uzbek | Shaykh Muhammad Sodiq Muhammad Yusuf (1952–2015) | Cyrillic original; Latin version converted automatically |
+| Russian | Elmir Kuliev | |
+| English | Saheeh International (Jeddah, 1997) | |
+
+All texts come from the Al-Quran Cloud API (`uz.sodik`, `ru.kuliev`, `en.sahih`, `quran-uthmani`).
+Uzbekistan has no single legally designated "official" translation; the app explains this on its
+*About translations* screen.
 
 ## Features
 - **New verse every hour** — or every 30 min / 3 h / 6 h / once a day (Settings in the app)

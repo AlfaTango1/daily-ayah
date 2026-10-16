@@ -24,7 +24,7 @@
     <string name="your_widgets">Ваши виджеты</string>
     <string name="no_widgets">На главном экране пока нет виджетов.</string>
     <string name="add_widget_manual">Нажмите и удерживайте главный экран, выберите «Виджеты» и найдите «Аят дня».</string>
-    <string name="attribution">Арабский текст: Tanzil (Усмани). Переводы: Sahih International, Эльмир Кулиев. Данные: alquran.cloud. Арабские шрифты: Google Fonts (SIL Open Font License).</string>
+    <string name="attribution">Переводы: Мухаммад Содик Мухаммад Юсуф (узбекский), Эльмир Кулиев (русский), Saheeh International (английский). Арабский текст: Tanzil. Шрифты: Google Fonts.</string>
 
     <!-- Intervals -->
     <string name="interval_30m">Каждые 30 минут</string>
@@ -56,9 +56,6 @@
     <string name="content_translation">Перевод</string>
     <string name="content_custom">Свой текст</string>
     <string name="translation">Перевод</string>
-    <string name="mode_english">English</string>
-    <string name="mode_russian">Русский</string>
-    <string name="mode_both">Оба</string>
     <string name="custom_text_hint">Ваш текст (зикр, дуа, напоминание)</string>
     <string name="arabic_font">Арабский шрифт</string>
     <string name="text_font">Шрифт перевода</string>
@@ -78,4 +75,24 @@
     <string name="show_reference">Ссылка на аят</string>
     <string name="save">Сохранить</string>
     <string name="reset">Сбросить</string>
+    <string name="lang_uz_latn">Oʻzbekcha (lotin)</string>
+    <string name="lang_uz_cyrl">Ўзбекча (кирилл)</string>
+    <string name="lang_ru">Русский</string>
+    <string name="lang_en">English</string>
+    <string name="translations_hint">Выберите один или несколько переводов.</string>
+    <string name="app_language">Язык приложения</string>
+    <string name="lang_system">Как в телефоне</string>
+    <string name="about_translations">О переводах</string>
+    <string name="about_title">Источники переводов</string>
+    <string name="about_intro">Коран — это арабский текст. Переводы передают его смыслы и являются трудом учёных; для глубокого изучения обращайтесь к арабскому тексту и к знающему наставнику.</string>
+    <string name="about_arabic_title">Арабский текст — усманское написание</string>
+    <string name="about_arabic_body">Стандартный текст в усманском написании, проверенный и опубликованный проектом Tanzil (tanzil.net).</string>
+    <string name="about_uz_title">Узбекский — шейх Мухаммад Содик Мухаммад Юсуф</string>
+    <string name="about_uz_body">Перевод смыслов Корана шейха Мухаммада Содика Мухаммада Юсуфа (1952–2015), муфтия Духовного управления мусульман Средней Азии и Казахстана (1989–1993), автора тафсира «Тафсири Хилол». Один из самых читаемых узбекских переводов; Комитет по делам религий при Кабинете министров Узбекистана объявил о его издании на латинице.\n\nОригинал — на кириллице. Латинская версия в приложении получена автоматической побуквенной транслитерацией, поэтому возможны редкие расхождения в написании.\n\nПримечание: в Узбекистане нет единственного законодательно закреплённого «официального» перевода. Признаны также переводы Алоуддина Мансура (1992) и Абдулазиза Мансура (2001); в эту версию они не включены.</string>
+    <string name="about_ru_title">Русский — Эльмир Кулиев</string>
+    <string name="about_ru_body">Перевод смыслов Корана азербайджанского исламоведа Эльмира Кулиева, завершённый в 2002 году и переработанный в последующих изданиях; один из самых распространённых русских переводов.</string>
+    <string name="about_en_title">Английский — Saheeh International</string>
+    <string name="about_en_body">Перевод трёх американских переводчиц-мусульманок, изданный в 1997 году издательством Abul-Qasim в Джидде (Саудовская Аравия).</string>
+    <string name="about_data_title">Данные и шрифты</string>
+    <string name="about_data_body">Тексты берутся из открытого API Al-Quran Cloud (alquran.cloud) при сборке приложения и хранятся внутри него — на телефоне ничего не скачивается. Арабские шрифты: Google Fonts, SIL Open Font License.</string>
 </resources>

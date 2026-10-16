@@ -21,10 +21,10 @@ enum class WidgetKind(
     fun defaultStyle(): WidgetStyle {
         val translation = WidgetStyle.defaultTranslation()
         return when (this) {
-            LARGE -> WidgetStyle(translation = translation)
+            LARGE -> WidgetStyle(translations = translation)
             COMPACT -> WidgetStyle(
                 content = ContentMode.TRANSLATION_ONLY,
-                translation = translation,
+                translations = translation,
                 textSize = 13,
                 textFont = "serif",
                 align = TextAlign.START,
@@ -33,13 +33,13 @@ enum class WidgetKind(
             )
             ARABIC -> WidgetStyle(
                 content = ContentMode.ARABIC_ONLY,
-                translation = translation,
+                translations = translation,
                 arabicSize = 26,
                 theme = "midnight",
             )
             DHIKR -> WidgetStyle(
                 content = ContentMode.CUSTOM_TEXT,
-                translation = translation,
+                translations = translation,
                 customText = DEFAULT_DHIKR,
                 arabicSize = 26,
                 theme = "gold",

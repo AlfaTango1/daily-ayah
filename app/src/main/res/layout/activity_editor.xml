@@ -105,37 +105,49 @@
             <!-- Translation -->
             <TextView style="@style/EditorLabel" android:text="@string/translation" />
 
-            <com.google.android.material.button.MaterialButtonToggleGroup
+            <com.google.android.material.chip.ChipGroup
                 android:id="@+id/translationGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:selectionRequired="true"
-                app:singleSelection="true">
+                app:singleSelection="false">
 
-                <Button
-                    android:id="@+id/trEn"
-                    style="?attr/materialButtonOutlinedStyle"
-                    android:layout_width="0dp"
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/trUzLatn"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/mode_english" />
+                    android:text="@string/lang_uz_latn" />
 
-                <Button
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/trUzCyrl"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lang_uz_cyrl" />
+
+                <com.google.android.material.chip.Chip
                     android:id="@+id/trRu"
-                    style="?attr/materialButtonOutlinedStyle"
-                    android:layout_width="0dp"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/mode_russian" />
+                    android:text="@string/lang_ru" />
 
-                <Button
-                    android:id="@+id/trBoth"
-                    style="?attr/materialButtonOutlinedStyle"
-                    android:layout_width="0dp"
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/trEn"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/mode_both" />
-            </com.google.android.material.button.MaterialButtonToggleGroup>
+                    android:text="@string/lang_en" />
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/translations_hint"
+                android:textColor="@color/text_muted"
+                android:textSize="12sp" />
 
             <!-- Fonts -->
             <TextView style="@style/EditorLabel" android:text="@string/arabic_font" />

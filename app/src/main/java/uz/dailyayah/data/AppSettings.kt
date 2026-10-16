@@ -26,7 +26,7 @@ object AppSettings {
     }
 
     fun defaultAppStyle() = WidgetStyle(
-        translation = WidgetStyle.defaultTranslation(),
+        translations = WidgetStyle.defaultTranslation(),
         arabicSize = 26,
         textSize = 17,
         corner = 20,

@@ -160,6 +160,15 @@
             app:selectionRequired="true"
             app:singleSelection="true" />
 
+        <TextView style="@style/EditorLabel" android:text="@string/app_language" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/languageGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:selectionRequired="true"
+            app:singleSelection="true" />
+
         <Button
             android:id="@+id/btnTextStyle"
             style="?attr/materialButtonOutlinedStyle"
@@ -201,10 +210,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" />
 
-        <TextView
+        <Button
+            android:id="@+id/btnAbout"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
+            android:text="@string/about_translations" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:gravity="center"
             android:text="@string/attribution"
             android:textColor="@color/text_muted"

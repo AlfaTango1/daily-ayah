@@ -10,6 +10,8 @@ data class Verse(
     val arabic: String,
     val english: String,
     val russian: String,
+    val uzbekLatin: String,
+    val uzbekCyrillic: String,
 ) {
     /** e.g. "Al-Baqara 2:255" */
     val reference: String get() = "$surahNameEn $surahNumber:$numberInSurah"

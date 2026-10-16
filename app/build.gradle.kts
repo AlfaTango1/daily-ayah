@@ -80,6 +80,38 @@ fun httpGet(url: String): ByteArray {
     throw GradleException("Download failed: $url", lastError)
 }
 
+/** Uzbek Cyrillic -> Latin, following the official 1995 Latin alphabet (oʻ, gʻ, sh, ch, ʼ). */
+fun uzbekCyrillicToLatin(text: String): String {
+    val map = mapOf(
+        'а' to "a", 'б' to "b", 'в' to "v", 'г' to "g", 'д' to "d", 'ё' to "yo", 'ж' to "j",
+        'з' to "z", 'и' to "i", 'й' to "y", 'к' to "k", 'л' to "l", 'м' to "m", 'н' to "n",
+        'о' to "o", 'п' to "p", 'р' to "r", 'с' to "s", 'т' to "t", 'у' to "u", 'ф' to "f",
+        'х' to "x", 'ц' to "ts", 'ч' to "ch", 'ш' to "sh", 'щ' to "sh", 'ъ' to "\u02BC",
+        'ы' to "i", 'ь' to "", 'э' to "e", 'ю' to "yu", 'я' to "ya",
+        'ў' to "o\u02BB", 'қ' to "q", 'ғ' to "g\u02BB", 'ҳ' to "h",
+    )
+    val vowels = "аеёиоуўэюя"
+    val out = StringBuilder(text.length + 16)
+    for (i in text.indices) {
+        val ch = text[i]
+        val lower = ch.lowercaseChar()
+        val prev = if (i > 0) text[i - 1].lowercaseChar() else ' '
+        var latin: String = when {
+            // "е" is "ye" at the start of a word and after a vowel or ъ/ь, otherwise "e".
+            lower == 'е' -> if (!prev.isLetter() || prev in vowels || prev == 'ъ' || prev == 'ь') "ye" else "e"
+            else -> map[lower] ?: run { out.append(ch); null }
+        } ?: continue
+        if (ch != lower && latin.isNotEmpty()) {
+            val next = text.getOrNull(i + 1)
+            val wordIsUpper = (next != null && next.isLetter() && next.isUpperCase()) ||
+                (i > 0 && text[i - 1].isLetter() && text[i - 1].isUpperCase() && (next == null || !next.isLetter()))
+            latin = if (wordIsUpper) latin.uppercase() else latin.replaceFirstChar { it.uppercaseChar() }
+        }
+        out.append(latin)
+    }
+    return out.toString()
+}
+
 fun parseJson(bytes: ByteArray): Any = JsonSlurper().parseText(String(bytes, Charsets.UTF_8))
 
 val downloadQuranAssets by tasks.registering {
@@ -88,7 +120,12 @@ val downloadQuranAssets by tasks.registering {
     doLast {
         // 1) Quran text: one ayah per line, 6236 lines per file.
         val quranDir = File(assetsDir, "quran").apply { mkdirs() }
-        val editions = linkedMapOf("ar" to "quran-uthmani", "en" to "en.sahih", "ru" to "ru.kuliev")
+        val editions = linkedMapOf(
+            "ar" to "quran-uthmani",
+            "en" to "en.sahih",
+            "ru" to "ru.kuliev",
+            "uz" to "uz.sodik", // Muhammad Sodiq Muhammad Yusuf (Cyrillic script)
+        )
         for ((name, edition) in editions) {
             val out = File(quranDir, "$name.txt")
             val metaOut = File(quranDir, "surahs.json")
@@ -128,6 +165,16 @@ val downloadQuranAssets by tasks.registering {
             if (lines.size != 6236) throw GradleException("$edition: expected 6236 ayahs, got ${lines.size}")
             out.writeText(lines.joinToString("\n"), Charsets.UTF_8)
             if (name == "ar") metaOut.writeText(JsonOutput.toJson(meta), Charsets.UTF_8)
+        }
+
+        // Uzbek in Latin script, converted from the Cyrillic original letter by letter.
+        val uzLatin = File(quranDir, "uz_lat.txt")
+        val uzCyrillic = File(quranDir, "uz.txt")
+        if (uzLatin.length() == 0L || uzLatin.lastModified() < uzCyrillic.lastModified()) {
+            uzLatin.writeText(
+                uzCyrillic.readLines(Charsets.UTF_8).joinToString("\n") { uzbekCyrillicToLatin(it) },
+                Charsets.UTF_8
+            )
         }
 
         // 2) Arabic fonts from the Google Fonts repository (SIL Open Font License).
