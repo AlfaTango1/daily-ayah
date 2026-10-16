@@ -105,6 +105,7 @@ val downloadQuranAssets by tasks.registering {
                 val ayahs = s["ayahs"] as List<*>
                 ayahs.forEachIndexed { i, a ->
                     var text = ((a as Map<*, *>)["text"] as String)
+                        .replace("﻿", "") // byte-order mark at the very start of the text
                         .replace("\r", " ").replace("\n", " ").trim()
                     if (name == "ar") {
                         if (surahNumber == 1 && i == 0) bismillah = text
