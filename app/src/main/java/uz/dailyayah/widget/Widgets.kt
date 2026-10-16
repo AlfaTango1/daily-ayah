@@ -47,8 +47,17 @@ abstract class BaseVerseWidget : AppWidgetProvider() {
             }
             AppWidgetManager.ACTION_APPWIDGET_ENABLED -> RenewScheduler.schedule(context)
             AppWidgetManager.ACTION_APPWIDGET_DELETED -> WidgetStore.delete(context, ids)
-            WidgetUpdater.ACTION_NEXT_VERSE -> if (singleId != AppWidgetManager.INVALID_APPWIDGET_ID) {
-                WidgetStore.setOverride(context, singleId, Random.nextInt(1, QuranData.TOTAL_AYAHS + 1))
+            WidgetUpdater.ACTION_NEXT_VERSE,
+            WidgetUpdater.ACTION_PREV_VERSE,
+            WidgetUpdater.ACTION_FOLLOWING_VERSE -> if (singleId != AppWidgetManager.INVALID_APPWIDGET_ID) {
+                val current = WidgetStore.ayahFor(context, singleId)
+                val total = QuranData.TOTAL_AYAHS
+                val target = when (intent.action) {
+                    WidgetUpdater.ACTION_PREV_VERSE -> if (current <= 1) total else current - 1
+                    WidgetUpdater.ACTION_FOLLOWING_VERSE -> if (current >= total) 1 else current + 1
+                    else -> Random.nextInt(1, total + 1)
+                }
+                WidgetStore.setOverride(context, singleId, target)
                 WidgetUpdater.update(context, manager, singleId, kind)
             }
         }

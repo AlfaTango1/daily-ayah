@@ -10,6 +10,35 @@
         android:layout_height="match_parent"
         android:scaleType="fitCenter" />
 
+    <!-- Invisible tap zones: left = previous verse, centre = open, right = next verse. -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/zone_prev"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/prev" />
+
+        <FrameLayout
+            android:id="@+id/zone_centre"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:contentDescription="@string/open_in_hilol" />
+
+        <FrameLayout
+            android:id="@+id/zone_next"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/next" />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

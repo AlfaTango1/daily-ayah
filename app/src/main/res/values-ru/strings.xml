@@ -101,4 +101,5 @@
     <string name="tap_app">Это приложение</string>
     <string name="hilol_goto">Перейдите: %1$s, аят %2$d:%3$d</string>
     <string name="hilol_not_installed">Tafsiri Hilol не установлен. Открываю Google Play…</string>
+    <string name="tap_zones_hint">На виджете: нажмите на левый край — предыдущий аят, на правый — следующий, в центр — открыть.</string>
 </resources>

@@ -101,4 +101,5 @@
     <string name="tap_app">Shu ilova</string>
     <string name="hilol_goto">%1$s, %2$d:%3$d-oyatga oʻting</string>
     <string name="hilol_not_installed">Tafsiri Hilol oʻrnatilmagan. Google Play ochilmoqda…</string>
+    <string name="tap_zones_hint">Vidjetda: chap chetini bossangiz — oldingi oyat, oʻng chetini — keyingi oyat, oʻrtasini — ochish.</string>
 </resources>

@@ -20,7 +20,9 @@ import kotlin.math.sqrt
 /** Builds and pushes the RemoteViews for widgets. Call from a background thread. */
 object WidgetUpdater {
 
-    const val ACTION_NEXT_VERSE = "uz.dailyayah.action.NEXT_VERSE"
+    const val ACTION_NEXT_VERSE = "uz.dailyayah.action.NEXT_VERSE"           // random verse
+    const val ACTION_PREV_VERSE = "uz.dailyayah.action.PREV_VERSE"           // verse before
+    const val ACTION_FOLLOWING_VERSE = "uz.dailyayah.action.FOLLOWING_VERSE" // verse after
     const val EXTRA_AYAH = "uz.dailyayah.extra.AYAH"
 
     /** Upper bound for the widget image, to stay within launcher memory limits. */
@@ -70,25 +72,28 @@ object WidgetUpdater {
         views.setInt(R.id.widget_edit, "setColorFilter", theme.accent)
         views.setViewVisibility(R.id.widget_next, if (isCustom) View.GONE else View.VISIBLE)
 
-        // Tap the widget: open the app on this verse.
+        // Centre of the widget: open this verse in Tafsiri Hilol (or in this app, per setting).
         val open = Intent(context, MainActivity::class.java)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         if (verse != null) open.putExtra(EXTRA_AYAH, verse.number)
-        // ...or in Tafsiri Hilol, if the user chose that.
-        val tapIntent = if (verse != null && AppSettings.tapOpensHilol(context)) HilolLink.widgetIntent(context, verse) else open
-        views.setOnClickPendingIntent(
-            R.id.widget_root,
-            PendingIntent.getActivity(context, widgetId, tapIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        val centreIntent = if (verse != null && AppSettings.tapOpensHilol(context)) HilolLink.widgetIntent(context, verse) else open
+        val centre = PendingIntent.getActivity(
+            context, widgetId, centreIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        views.setOnClickPendingIntent(R.id.zone_centre, centre)
+
+        fun broadcast(action: String): PendingIntent = PendingIntent.getBroadcast(
+            context, widgetId,
+            Intent(context, kind.provider).setAction(action).putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId),
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        // Show another verse in this widget.
-        val next = Intent(context, kind.provider)
-            .setAction(ACTION_NEXT_VERSE)
-            .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId)
-        views.setOnClickPendingIntent(
-            R.id.widget_next,
-            PendingIntent.getBroadcast(context, widgetId, next, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
-        )
+        // Left / right edges: previous / next verse. (A custom-text widget has no verses: open the app.)
+        views.setOnClickPendingIntent(R.id.zone_prev, if (isCustom) centre else broadcast(ACTION_PREV_VERSE))
+        views.setOnClickPendingIntent(R.id.zone_next, if (isCustom) centre else broadcast(ACTION_FOLLOWING_VERSE))
+
+        // ↻ button: a random verse.
+        views.setOnClickPendingIntent(R.id.widget_next, broadcast(ACTION_NEXT_VERSE))
 
         // Edit this widget's fonts, colours and content.
         val edit = Intent(context, WidgetEditorActivity::class.java)

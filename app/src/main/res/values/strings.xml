@@ -101,4 +101,5 @@
     <string name="tap_app">This app</string>
     <string name="hilol_goto">Go to %1$s, verse %2$d:%3$d</string>
     <string name="hilol_not_installed">Tafsiri Hilol is not installed. Opening Google Play…</string>
+    <string name="tap_zones_hint">On a widget: tap the left edge for the previous verse, the right edge for the next one, the centre to open it.</string>
 </resources>
